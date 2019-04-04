@@ -1,0 +1,56 @@
+data_dir: '/storage/datasets/squad-phrase/data/'
+out_dir: '/storage/phrase_level_qa/runs/'
+use_out_dir: ''
+checkpoint: ''
+
+model_name: 'lstm'
+batch_size: 32
+num_epochs: 30
+learning_rate: 0.001
+optimiser: 'Adam'
+l1_reg: 0.0
+l2_reg: 0.0
+max_para_len: 400
+max_quest_len: 50
+encoder_n_layers: -1
+patience: 1
+decay: -1.0
+
+# word embeddings
+use: 'glove'
+word_emb_size: 300
+train_wemb: False
+word_vocab_size: 111137
+input_emb_keep_prob: 1.0
+
+# char embeddings
+char_emb: False
+char_vocab_size: -1
+char_emb_size: -1
+char_hidden_units: -1
+max_word_len: -1
+highway_layer: False
+
+# for lstm
+rnn_hidden_units: 150
+output_dropout_keep_prob: 1.0
+input_dropout_keep_prob: 1.0
+state_dropout_keep_prob: 1.0
+
+# for conv + attention
+num_filters: -1
+num_heads: -1
+
+# for fc
+dropout_keep_prob: 1.0
+hidden_units: -1
+
+random_seed: 3435
+evaluate_every: 1
+
+gpu_fraction: 0.5
+allow_soft_placement: True
+log_device_placement: False
+summaries: False
+
+comments: 'use last unit in lstm instead of maxpool; residual layers for encoder'

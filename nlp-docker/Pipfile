@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+numpy = {version="*", index="pypi"}
+tabulate = {version="*", index="pypi"}
+tqdm = {version="*", index="pypi"}
+bottle = {version="*", index="pypi"}
+spacy = {version="==2.0.18", index="pypi"}
+pyyaml = {version="*", index="pypi"}
+tensorflow-gpu = {file="https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.12.0-cp36-cp36m-linux_x86_64.whl"}
+#tensorflow = {file="https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.12.0-cp36-cp36m-linux_x86_64.whl"}
+
+[requires]
+python_version = "3.6"
