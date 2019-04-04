@@ -1,20 +1,20 @@
 # Question-Answering Networks
 
 This repo implements a set of question-answering networks 
-on the [SQuAD dataset] (https://rajpurkar.github.io/SQuAD-explorer/). 
+on the [SQuAD dataset](https://rajpurkar.github.io/SQuAD-explorer/). 
 They range from baselines, using just a 
 dense layer or an lstm as a decoder up to models which were
 state-of-the-art at the time of publication. The models are:
   - Base-Model with Dense Layer as Decoder
   - LSTM-Model with a BiLSTM Layer plus an implementation of Pointer Net as Decoder
-  - [MatchLSTM] (https://arxiv.org/abs/1608.07905)
-  - [RNet] (https://www.microsoft.com/en-us/research/wp-content/uploads/2017/05/r-net.pdf)
-  - [QANet] (https://arxiv.org/abs/1804.09541) 
+  - [MatchLSTM](https://arxiv.org/abs/1608.07905)
+  - [RNet](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/05/r-net.pdf)
+  - [QANet](https://arxiv.org/abs/1804.09541) 
  
 While they since have been improved on using transfer-learning 
-approaches such as [ELMo] (https://github.com/allenai/bilm-tf), 
-[OpenAI GPT] (https://github.com/openai/finetune-transformer-lm)
-or [Bert] (https://github.com/google-research/bert) I hope they
+approaches such as [ELMo](https://github.com/allenai/bilm-tf), 
+[OpenAI GPT](https://github.com/openai/finetune-transformer-lm)
+or [Bert](https://github.com/google-research/bert) I hope they
 still provide a useful reference for interested practitioners.
 
 We used preprocessing and layer implementations from a set of other great 
@@ -74,9 +74,8 @@ created using the Dockerfile in this repo. Build the Docker Image using
 ```shell
 $ docker build -t nlp-tf1.12 .
 ```
-if you have Nvidia-Docker installed (follow the instructions [here] 
-(https://docs.docker.com/install/) and [here] (https://github.com/nvidia/nvidia-docker/wiki/Installation-(version-2.0))
- pto install it). Once this is done start
+if you have Nvidia-Docker installed (follow the instructions [here](https://docs.docker.com/install/) and [here](https://github.com/nvidia/nvidia-docker/wiki/Installation-(version-2.0))
+ to install it). Once this is done start
 the docker container using
 ```shell
 $ docker run --runtime=nvidia -e NVIDIA_VISIBLE_DEVICES=0 -v /path/to/repo/question-answering:/question-answering -it nlp-tf1.12 /bin/bash 
@@ -133,5 +132,5 @@ were run on a NVIDIA
 |      match-lstm|       30        |  150 | 60.31 | 70.26 |      ~35         |
 |cudnn-match-lstm|       50        |  150 | 60.43 | 70.32 |      ~12         |
 |          QA-Net|       50        |  128 | 67.81 | 77.74 |      ~15         |
-|           R-Net|       30        |  150 |       |       |      ~38         |
-|     cudnn-R-Net|       50        |  32 | 68.84 | 78.14 |       ~8         |
+|           R-Net|       30        |   32 |       |       |      ~38         |
+|     cudnn-R-Net|       50        |   32 | 68.84 | 78.14 |       ~8         |
