@@ -123,7 +123,7 @@ $ python3 evaluate-v1.1.py ./data/squad/dev-v1.1.json ./runs/[model_name]/answer
 
 ## Results
 Here I've collected some results from the various implementations. All experiments
-were run on a NVIDIA 
+were run on an NVIDIA GTX 1080 Ti gpu.
 
 |      Model     | Training Epochs | Size |  EM   |  F1   | train-time (hrs) |
 |:--------------:|:---------------:|:----:|:-----:|:-----:|:----------------:|
