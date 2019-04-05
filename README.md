@@ -24,7 +24,7 @@ repos implementing those models which are:
   - https://github.com/MurtyShikhar/Question-Answering
   
 ## Requirements
-This repo has been tested using:
+This repo has been tested using python3.6 and the following package versions:
   - numpy==1.16.2
   - tabulate==0.8.3
   - tqdm==4.31.1
@@ -122,8 +122,9 @@ $ python3 evaluate-v1.1.py ./data/squad/dev-v1.1.json ./runs/[model_name]/answer
 ```
 
 ## Results
-Here I've collected some results from the various implementations. All experiments
-were run on an NVIDIA GTX 1080 Ti gpu.
+Here I've collected some results from the various implementations. The results 
+ come from the split off part of the training set, not the official dev set. 
+ All experiments were run on an NVIDIA GTX 1080 Ti gpu.
 
 |      Model     | Training Epochs | Size |  EM   |  F1   | train-time (hrs) |
 |:--------------:|:---------------:|:----:|:-----:|:-----:|:----------------:|
@@ -132,5 +133,5 @@ were run on an NVIDIA GTX 1080 Ti gpu.
 |      match-lstm|       30        |  150 | 60.31 | 70.26 |      ~35         |
 |cudnn-match-lstm|       50        |  150 | 60.43 | 70.32 |      ~12         |
 |          QA-Net|       50        |  128 | 67.81 | 77.74 |      ~15         |
-|           R-Net|       30        |   32 |       |       |      ~38         |
+|           R-Net|       30        |   32 | 57.04 | 66.99 |      ~38         |
 |     cudnn-R-Net|       50        |   32 | 68.84 | 78.14 |       ~8         |

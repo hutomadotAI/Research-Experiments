@@ -22,7 +22,7 @@ class Encoder(object):
         context, question = inputs
         context_mask, question_mask = masks
 
-        with tf.variable_scope("encode_context"):
+        with tf.variable_scope("encode"):
             # outshape: [batch_size, 2 * rnn_hidden_units]
             lstm_pool_context, lstm_out_context = BiGRU(
                 context,
@@ -39,7 +39,6 @@ class Encoder(object):
             lstm_out_context = tf.concat([lstm_out_context[0], lstm_out_context[1]],
                                          2, name='lstm_out_context')
 
-        with tf.variable_scope('encode_question'):
             lstm_pool_question, lstm_out_question = BiGRU(
                 question,
                 question_mask,
@@ -51,7 +50,7 @@ class Encoder(object):
                 residual=True,
                 use_last=True,
                 seed=self.seed,
-                reuse=False)
+                reuse=True)
             lstm_out_question = tf.concat([lstm_out_question[0], lstm_out_question[1]],
                                           2, name='lstm_out_question')
 
@@ -78,17 +77,15 @@ class CharEncoderLSTM(object):
         context, question = inputs
         context_word_mask, question_word_mask = word_masks
 
-        with tf.variable_scope("context"):
+        with tf.variable_scope("char_emb"):
             context_rep = self.encode_chars(context, context_word_mask, is_train)
-
-        with tf.variable_scope("question"):
-            question_rep = self.encode_chars(question, question_word_mask, is_train)
+            question_rep = self.encode_chars(question, question_word_mask, is_train, reuse=True)
 
         return context_rep, question_rep
 
-    def encode_chars(self, char_ids, word_len, is_train):
+    def encode_chars(self, char_ids, word_len, is_train, reuse=False):
         # compute word embedding from chars
-        with tf.variable_scope("char_2_word_lstm"):
+        with tf.variable_scope("char_2_word_lstm", reuse=reuse):
             seq_len = tf.shape(char_ids)[1]
             max_char_len = tf.shape(char_ids)[2]
             char_ids_flat = tf.reshape(char_ids, shape=[-1, max_char_len])

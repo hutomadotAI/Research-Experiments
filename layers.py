@@ -199,21 +199,21 @@ def BiGRU(x, seq_len, n_hidden,
                 kernel_initializer=tf.initializers.variance_scaling(distribution='uniform', seed=seed),
                 reuse=reuse
             )
-            # cell_drop = tf.contrib.rnn.DropoutWrapper(
-            #     cell,
-            #     input_keep_prob=input_dropout_keep_prob,
-            #     output_keep_prob=output_dropout_keep_prob,
-            #     state_keep_prob=state_dropout_keep_prob,
-            #     variational_recurrent=True,
-            #     dtype=tf.float32,
-            #     input_size=x.get_shape()[2].value if i == 0 else [1, 2*n_hidden],
-            #     seed=seed
-            # )
-            #
-            # if residual and i > 0:
-            #     cell_drop = tf.contrib.rnn.ResidualWrapper(cell_drop)
+            cell_drop = tf.contrib.rnn.DropoutWrapper(
+                cell,
+                input_keep_prob=input_dropout_keep_prob,
+                output_keep_prob=output_dropout_keep_prob,
+                state_keep_prob=state_dropout_keep_prob,
+                variational_recurrent=True,
+                dtype=tf.float32,
+                input_size=x.get_shape()[2].value if i == 0 else [1, 2*n_hidden],
+                seed=seed
+            )
 
-            layers.append(cell)
+            if residual and i > 0:
+                cell_drop = tf.contrib.rnn.ResidualWrapper(cell_drop)
+
+            layers.append(cell_drop)
 
         gru_drop_multi_fw = tf.contrib.rnn.MultiRNNCell(layers, state_is_tuple=True)
 
@@ -226,21 +226,21 @@ def BiGRU(x, seq_len, n_hidden,
                 kernel_initializer=tf.initializers.variance_scaling(distribution='uniform', seed=seed),
                 reuse=reuse
             )
-            # cell_drop = tf.contrib.rnn.DropoutWrapper(
-            #     cell,
-            #     input_keep_prob=input_dropout_keep_prob,
-            #     output_keep_prob=output_dropout_keep_prob,
-            #     state_keep_prob=state_dropout_keep_prob,
-            #     variational_recurrent=True,
-            #     dtype=tf.float32,
-            #     input_size=x.get_shape()[2].value if i == 0 else [1, 2*n_hidden],
-            #     seed=seed
-            # )
-            #
-            # if residual and i > 0:
-            #     cell_drop = tf.contrib.rnn.ResidualWrapper(cell_drop)
+            cell_drop = tf.contrib.rnn.DropoutWrapper(
+                cell,
+                input_keep_prob=input_dropout_keep_prob,
+                output_keep_prob=output_dropout_keep_prob,
+                state_keep_prob=state_dropout_keep_prob,
+                variational_recurrent=True,
+                dtype=tf.float32,
+                input_size=x.get_shape()[2].value if i == 0 else [1, 2*n_hidden],
+                seed=seed
+            )
 
-            layers.append(cell)
+            if residual and i > 0:
+                cell_drop = tf.contrib.rnn.ResidualWrapper(cell_drop)
+
+            layers.append(cell_drop)
 
         gru_drop_multi_bw = tf.contrib.rnn.MultiRNNCell(layers, state_is_tuple=True)
 
